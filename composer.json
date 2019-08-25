@@ -1,0 +1,25 @@
+{
+  "name": "jameelmoses/acf-flexible-content-extended",
+  "version": "1.0.0",
+  "description": "Extends the ACF Flexible Content Field by transforming the layout list into a modal with image previews. Editing the fields layouts also happens in a modal for a better editing user experience.",
+  "keywords": [
+    "WP",
+    "ACF",
+    "Advanced Custom Fields",
+    "Flexible Content Field",
+    "Flexible Content Field Preview",
+    "Flexible Content Field Modal"
+  ],
+  "homepage": "https://github.com/jameelmoses/acf-flexible-content-extended",
+  "authors": [{
+    "name": "Jameel Moses",
+    "email": "hello@jameelmoses.com",
+    "homepage": "https://github.com/jameelmoses"
+  }],
+  "type": "wordpress-plugin",
+  "minimum-stability": "stable",
+  "license": "GPL-3.0+",
+  "require": {
+    "php": ">=5.6.0"
+  }
+}

@@ -1,0 +1,14 @@
+.distignore
+.github
+.git
+.gitignore
+CHANGELOG.md
+composer.json
+composer.lock
+vendor/
+LICENSE.md
+README.md
+assets/scss
+node_modules
+package.json
+yarn.lock
