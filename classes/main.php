@@ -1,61 +1,148 @@
 <?php namespace ACF_FCE;
 
-/**
- * Singleton base class for having singleton implementation
- * This allows you to have only one instance of the needed object
- * You can get the instance with
- *     $class = My_Class::get_instance();
- *
- * /!\ The get_instance method have to be implemented !
- *
- * Class Singleton
- * @package ACF_FCE
- */
-trait Singleton {
+class Main {
+	use Singleton;
+
+	protected function init() {
+
+		// Assets
+		add_action( 'acf/input/admin_footer', [ $this, 'register_assets' ], 1 );
+		add_action( 'acf/input/admin_footer', [ $this, 'enqueue_assets' ] );
+
+		// Images
+		add_action( 'acf/input/admin_footer', [ $this, 'layouts_images_style' ], 20 );
+
+		add_action( 'acf/input/admin_head', [ $this, 'retrieve_flexible_keys' ], 1 );
+	}
 
 	/**
-	 * @var self
+	 * Display the flexible layouts images related css for backgrounds
 	 */
-	protected static $instance;
-
-	/**
-	 * @return self
-	 */
-	final public static function get_instance() {
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new static;
+	public function layouts_images_style() {
+		$images = $this->get_layouts_images();
+		if ( empty( $images ) ) {
+			return;
 		}
 
-		return self::$instance;
+		$css = "\n<style>";
+		$css .= "\n\t /** Flexible Content Extended for Advanced Custom Fields : dynamic images */";
+		foreach ( $images as $layout_key => $image_url ) {
+			$css .= sprintf( "\n\t .acf-fc-popup ul li a[data-layout=%s] .acf-fc-popup-image { background-image: url(\"%s\"); }", $layout_key, $image_url );
+		}
+		$css .= "\n</style>\n";
+
+		echo $css;
 	}
 
 	/**
-	 * Constructor protected from the outside
-	 */
-	final private function __construct() {
-		$this->init();
-	}
-
-	/**
-	 * Add init function by default
-	 * Implement this method in your child class
-	 * If you want to have actions send at construct
-	 */
-	protected function init() {}
-
-	/**
-	 * prevent the instance from being cloned
+	 * Get all ACF flexible content field layout keys
 	 *
-	 * @return void
+	 * TODO: Add caching?
+	 *
+	 * @return array
 	 */
-	final private function __clone() {
+	public function retrieve_flexible_keys() {
+		$keys   = [];
+		$groups = acf_get_field_groups();
+		if ( empty( $groups ) ) {
+			return $keys;
+		}
+
+		foreach ( $groups as $group ) {
+			$fields = (array) acf_get_fields( $group );
+			if ( empty( $fields ) ) {
+				continue;
+			}
+
+			foreach ( $fields as $field ) {
+				if ( 'flexible_content' === $field['type'] ) {
+					// Flexible is recursive structure with sub_fields into layouts
+					foreach ( $field['layouts'] as $layout_field ) {
+						if ( ! empty( $keys [ $layout_field['key'] ] ) ) {
+							continue;
+						}
+						$keys[ $layout_field['key'] ] = $layout_field['name'];
+					}
+				}
+			}
+		}
+
+		return $keys;
 	}
 
 	/**
-	 * prevent from being unserialized
+	 * Get images for all flexible content field keys
 	 *
-	 * @return void
+	 * @return mixed
 	 */
-	final private function __wakeup() {
+	public function get_layouts_images() {
+		$flexibles = $this->retrieve_flexible_keys();
+		if ( empty( $flexibles ) ) {
+			return [];
+		}
+
+		foreach ( $flexibles as $flexible ) {
+			$layouts_images[ $flexible ] = $this->locate_image( $flexible );
+		}
+
+		/**
+		 * Allow to add/remove/change a flexible layout key
+		 *
+		 * @params array $layouts_images : Array of flexible content field layout's keys with associated image url
+		 *
+		 * @return array
+		 */
+		return apply_filters( 'acf-flexible-content-extended.images', $layouts_images );
+	}
+
+	/**
+	 * Locate layout in the theme or plugin if needed
+	 *
+	 * @param string $layout : the layout name, add automatically .jpg at the end of the file
+	 *
+	 * @return false|string
+	 */
+	public function locate_image( $layout ) {
+		if ( empty( $layout ) ) {
+			return false;
+		}
+
+		/**
+		 * Allow to add/remove/change the path to images
+		 *
+		 * @params array $path : Path to check
+		 *
+		 * @return array
+		 */
+		$path = apply_filters( 'acf-flexible-content-extended.images_path', 'lib/admin/images/acf-flexible-content-extended' );
+
+		// Rework the tpl
+		$layout = str_replace( '_', '-', $layout );
+
+		$image_path = get_stylesheet_directory() . '/' . $path . '/' . $layout . '.jpg';
+		$image_uri = get_stylesheet_directory_uri() . '/' . $path . '/' . $layout . '.jpg';
+
+		// Direct path to custom folder
+		if ( is_file( $image_path ) ) {
+			return $image_uri;
+		}
+
+		return ACF_FCE_URL . 'assets/images/default.jpg';
+	}
+
+	/**
+	 * Register assets
+	 */
+	public function register_assets() {
+		wp_register_script( 'acf-flexible-content-extended', ACF_FCE_URL . 'assets/js/acf-flexible-content-extended.js', [ 'jquery' ], ACF_FCE_VERSION );
+		wp_register_style( 'acf-flexible-content-extended', ACF_FCE_URL . 'assets/css/acf-flexible-content-extended.css', [], ACF_FCE_VERSION );
+	}
+
+	/**
+	 * Enqueue assets
+	 */
+	public function enqueue_assets() {
+		wp_enqueue_script( 'acf-flexible-content-extended' );
+		wp_enqueue_style( 'acf-flexible-content-extended' );
 	}
 }

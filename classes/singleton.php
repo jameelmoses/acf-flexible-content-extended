@@ -1,4 +1,4 @@
-<?php namespace FCP;
+<?php namespace ACF_FCE;
 
 /**
  * Singleton base class for having singleton implementation
@@ -9,7 +9,7 @@
  * /!\ The get_instance method have to be implemented !
  *
  * Class Singleton
- * @package FCP
+ * @package ACF_FCE
  */
 trait Singleton {
 

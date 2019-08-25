@@ -8,7 +8,10 @@ composer.lock
 vendor/
 LICENSE.md
 README.md
-assets/scss
+assets/src
 node_modules
 package.json
 yarn.lock
+.eslintrc.js
+.eslintignore
+gulpfile.babel.js

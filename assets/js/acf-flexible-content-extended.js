@@ -1,82 +1,70 @@
+"use strict";
+
 /* globals acf */
+
 /* eslint-disable no-console */
-
-(function($) {
-
+(function ($) {
   const ACFFCE = {
-
     modals: [],
 
     init() {
-
       if (typeof acf === 'undefined') {
         console.error('ACF JavaScript library not found!');
         return false;
       }
 
       ACFFCE.removeSinglePreviewModal();
-      ACFFCE.addPreviewModalLinkMarkup();
+      ACFFCE.addPreviewModalLinkMarkup(); // Add modal to current layouts
 
-      // Add modal to current layouts
-      acf.addAction('load_field/type=flexible_content', function(field) {
-        field.$el.find('.acf-flexible-content:first > .values > .layout:not(.fc-modal)').each(function() {
+      acf.addAction('load_field/type=flexible_content', function (field) {
+        field.$el.find('.acf-flexible-content:first > .values > .layout:not(.fc-modal)').each(function () {
           ACFFCE.addModal($(this));
         });
-      });
+      }); // Add modal to new layouts
 
-      // Add modal to new layouts
-      acf.addAction('after_duplicate', function($clone, $el) {
-        if ($el.is('.layout'))
-          ACFFCE.addModal($el);
-      });
+      acf.addAction('after_duplicate', function ($clone, $el) {
+        if ($el.is('.layout')) ACFFCE.addModal($el);
+      }); // Automatically open the new layout after append it, to improve usability
 
-      // Automatically open the new layout after append it, to improve usability
-      acf.addAction('append', function($el) {
-        if ($el.is('.layout'))
-          $el.find('> .acf-fc-layout-controls a.-pencil').trigger('click');
-      });
+      acf.addAction('append', function ($el) {
+        if ($el.is('.layout')) $el.find('> .acf-fc-layout-controls a.-pencil').trigger('click');
+      }); // Point error messages inside FC
 
-      // Point error messages inside FC
-      acf.addAction('invalid_field', function(field) {
+      acf.addAction('invalid_field', function (field) {
         ACFFCE.invalidField(field.$el);
-      });
+      }); // Remove error messages
 
-      // Remove error messages
-      acf.addAction('valid_field', function(field) {
+      acf.addAction('valid_field', function (field) {
         ACFFCE.validField(field.$el);
-      });
+      }); // Pressing ESC makes the modal to close
 
-      // Pressing ESC makes the modal to close
-      $(document).keyup(function(e) {
-        if (e.keyCode === 27 && $('body').hasClass('acf-modal-open'))
-          ACFFCE.close();
+      $(document).keyup(function (e) {
+        if (e.keyCode === 27 && $('body').hasClass('acf-modal-open')) ACFFCE.close();
       });
-
       return true;
-
     },
 
     removeSinglePreviewModal() {
-
       // Delete the flexible content preview popup if only one layout
       const flexibleContentField = acf.getField('acf-field-flexible-content');
-      flexibleContentField._open = function() {
+
+      flexibleContentField._open = function () {
         const $popup = $(this.$el.children('.tmpl-popup').html());
+
         if ($popup.find('a').length === 1) {
           // Only one layout
           flexibleContentField.add($popup.find('a').attr('data-layout'));
           return false;
         }
+
         return flexibleContentField.apply(this, arguments);
       };
-
     },
 
     addPreviewModalLinkMarkup() {
-
       // Add markup to links for easier styling
-      $('body').on('click', 'a[data-name="add-layout"]', function() {
-        $('.acf-fc-popup a').each(function() {
+      $('body').on('click', 'a[data-name="add-layout"]', function () {
+        $('.acf-fc-popup a').each(function () {
           const html = '<div class="acf-fc-popup-label">' + $(this).text() + '</div><div class="acf-fc-popup-image"></div>';
           $(this).html(html);
         });
@@ -84,115 +72,79 @@
     },
 
     addModal($layout) {
-
       $layout.addClass('fc-modal');
-      $layout.removeClass('-collapsed');
+      $layout.removeClass('-collapsed'); // Remove collapse button and click event
 
-      // Remove collapse button and click event
       $layout.find('> .acf-fc-layout-handle').off('click');
-      $layout.find('> .acf-fc-layout-controls > a.-collapse').remove();
+      $layout.find('> .acf-fc-layout-controls > a.-collapse').remove(); // Open modal when the collapsed layout is clicked
 
-      // Open modal when the collapsed layout is clicked
-      $layout.find('> .acf-fc-layout-handle').on('dblclick', ACFFCE.open);
+      $layout.find('> .acf-fc-layout-handle').on('dblclick', ACFFCE.open); // Edit button
 
-      // Edit button
       const edit = $('<a class="acf-icon -pencil small light" href="#" data-event="edit-layout" title="Edit layout" />');
       edit.on('click', ACFFCE.open);
-      $layout.find('> .acf-fc-layout-controls').append(edit);
+      $layout.find('> .acf-fc-layout-controls').append(edit); // Add modal elements
 
-      // Add modal elements
       $layout.prepend('<div class="acf-fc-modal-title" />');
       $layout.find('> .acf-fields, > .acf-table').wrapAll('<div class="acf-fc-modal-content" />');
-
     },
 
     open() {
-
       const $layout = $(this).parents('.layout:first');
-
       const caption = $layout.find('> .acf-fc-layout-handle').html();
       const a = $('<a class="dashicons dashicons-no -cancel" />').on('click', ACFFCE.close);
-
       $layout.find('> .acf-fc-modal-title').html(caption).append(a);
       $layout.addClass('-modal');
-
       ACFFCE.modals.push($layout);
-
       ACFFCE.overlay(true);
-
     },
 
     close() {
+      const $layout = ACFFCE.modals.pop(); // Refresh layout title
 
-      const $layout = ACFFCE.modals.pop();
-
-      // Refresh layout title
       const fc = $layout.parents('.acf-field-flexible-content:first');
       const field = acf.getInstance(fc);
-      field.closeLayout(field.$layout($layout.index()));
+      field.closeLayout(field.$layout($layout.index())); // Close
 
-      // Close
       $layout.find('> .acf-fc-modal-title').html(' ');
       $layout.removeClass('-modal').css('visibility', '');
       $layout.addClass('-highlight-closed');
-
-      setTimeout(function() {
+      setTimeout(function () {
         $layout.removeClass('-highlight-closed');
       }, 750);
-
       ACFFCE.overlay(false);
-
     },
 
     overlay(show) {
-
       if (show === true && !$('body').hasClass('acf-modal-open')) {
-
         const overlay = $('<div id="acf-flexible-content-modal-overlay" />').on('click', ACFFCE.close);
         $('body').addClass('acf-modal-open').append(overlay);
-
       } else if (show === false && ACFFCE.modals.length === 0) {
-
         $('#acf-flexible-content-modal-overlay').remove();
         $('body').removeClass('acf-modal-open');
-
       }
 
       ACFFCE.refresh();
-
     },
 
     refresh() {
-
-      $.each(ACFFCE.modals, function() {
+      $.each(ACFFCE.modals, function () {
         $(this).css('visibility', 'hidden').removeClass('-animate');
       });
-
       const index = ACFFCE.modals.length - 1;
-
-      if (index in ACFFCE.modals)
-        ACFFCE.modals[index].css('visibility', 'visible').addClass('-animate');
-
+      if (index in ACFFCE.modals) ACFFCE.modals[index].css('visibility', 'visible').addClass('-animate');
     },
 
     invalidField($el) {
-
       $el.parents('.layout').addClass('layout-error-messages');
-
     },
 
     validField($el) {
-
-      $el.parents('.layout').each(function() {
+      $el.parents('.layout').each(function () {
         const $layout = $(this);
-        if ($layout.find('.acf-error').length === 0)
-          $layout.removeClass('layout-error-messages');
+        if ($layout.find('.acf-error').length === 0) $layout.removeClass('layout-error-messages');
       });
-
     }
 
   };
-
   ACFFCE.init();
-
 })(jQuery);

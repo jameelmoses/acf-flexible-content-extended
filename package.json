@@ -26,6 +26,8 @@
     "del": "^5.0.0",
     "fixme": "^0.5.0",
     "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-load-plugins": "^2.0.1",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2"
