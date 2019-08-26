@@ -6,12 +6,17 @@ Extends the ACF Flexible Content Field by transforming the layout list into a mo
 
 [![Screenshot](.wordpress.org/screenshot-1.jpg)](#)
 
-## Image Conventions
+## Editing Layouts
+The button to collapse the layouts are changed to an edit button (pencil icon). When you click the edit button or double click the layout, the layout's field will be opened in a modal window.
+
+## Image Previews
+
+### Image Conventions
 
 * The size of the image should be 732 x 300.
 * They should be named based on the layout's name (`text_block`) with underscores converted to dashes (`text-block.jpg`).
 
-## Image Location
+### Image Location
 
 Images should be placed in your theme. Be fault, images are located here: `THEME/lib/admin/images/acf-flexible-content-extended`.
 
@@ -25,15 +30,15 @@ Additionally, you could filter all keys and/or images:
 
 `add_filter( 'acf-flexible-content-extended.images', $images );`
 
-# Requirements
+## Requirements
 
 - [ACF Pro >= 5.7.O](https://www.advancedcustomfields.com/) plugin
 - WordPress 4.7+ because of `[get_theme_file_uri()](https://developer.wordpress.org/reference/functions/get_theme_file_uri)`
 - PHP 5.6+
 
-# Installation
+## Installation
 
-## [Composer](http://composer.rarst.net/)
+### [Composer](http://composer.rarst.net/)
 
 - Add repository source : `{ "type": "vcs", "url": "https://github.com/jameelmoses/acf-flexible-content-extended" }`.
 - Include `"acf-flexible-content-extended": "dev-master"` in your composer file for last master's commits or a tag released.
@@ -43,7 +48,7 @@ Additionally, you could filter all keys and/or images:
 
 Please refer to the [contributing guidelines](.github/CONTRIBUTING.md) to increase the chance of your pull request to be merged and/or receive the best support for your issue.
 
-### Issues & Feature Requests
+## Issues & Feature Requests
 
 If you identify any errors or have an idea for improving the plugin, feel free to open an [issue](../../issues/new) or [create a pull request](../../compare). Please provide as much info as needed in order to help us resolving / approve your request.
 
