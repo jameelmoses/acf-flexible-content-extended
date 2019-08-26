@@ -16,14 +16,13 @@ Thanks for contributing !
   * Only target release branches if you are certain your fix must be on that branch.
   * To quickly create a topic branch based on the `master` branch:
     * `git checkout -b issue/{issue-number} master`
-    * a good example is `issue/7`
-* Make commits of logical units and that messages are helpful.
+* Make commits with helpful commit messages.
 
 # Submitting Changes
 
 * Push your changes to the according topic branch in your fork of the repository.
 * [Create a pull request](../../../compare) to our repository.
-* Wait for feedback. The team looks at pull requests on a regular basis.
+* Wait for feedback. I look at pull requests on a regular basis.
 
 # License
 

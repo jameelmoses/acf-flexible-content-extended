@@ -22,17 +22,21 @@ Extends the ACF Flexible Content Field by transforming the layout list into a mo
 
 = Image Location =
 
-Images should be placed in your theme. Be fault, images are located here: `THEME/lib/admin/images/acf-flexible-content-extended`.
+Images should be placed in your theme. By default, images are located here: `THEME/lib/admin/images/acf-flexible-content-extended`.
 
 Also note that you can filter this path, but it **MUST** be in your theme:
 
-`add_filter( 'acf-flexible-content-extended.images_path', $path );`
+```php
+add_filter( 'acf-flexible-content-extended.images_path', $path );
+```
 
 **NOTE:** The path should not have a trailing beginning or trailing slash!
 
 Additionally, you could filter all keys and/or images:
 
-`add_filter( 'acf-flexible-content-extended.images', $images );`
+```php
+add_filter( 'acf-flexible-content-extended.images', $images );
+```
 
 = Issues & Feature Requests =
 
@@ -44,8 +48,8 @@ This plugin works only if the [ACF Pro >= 5.7.O](https://www.advancedcustomfield
 
 # Requirements
 
-- [ACF Pro >= 5.7.O](https://www.advancedcustomfields.com/) plugin
-- WordPress 4.7+ because of `[get_theme_file_uri()](https://developer.wordpress.org/reference/functions/get_theme_file_uri)`
+- [ACF Pro >= 5.7.O](https://www.advancedcustomfields.com/)
+- WordPress 4.7+ because of [get_theme_file_uri()](https://developer.wordpress.org/reference/functions/get_theme_file_uri)
 - Tested up to WP 5.2.2
 - PHP 5.6+
 
@@ -58,11 +62,13 @@ From your WordPress dashboard
 
 == Screenshots ==
 
-1. See how Flexible Content Extended for Advanced Custom Fields improves the ACF flexible content field's layouts dropdown.
+1. Screenshot of Flexible Content Field Layouts Add Modal
+2. Screenshot of Flexible Content Field Layouts
+3. Screenshot of Flexible Content Field Layout Edit Modal
 
 == Changelog ==
 
 = 1.0.0 =
-*Release Date - 16 Aug 2019*
+*Release Date - 26 Aug 2019*
 
 * Initial release

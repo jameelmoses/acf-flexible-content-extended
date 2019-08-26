@@ -10,8 +10,8 @@ Please note :
 
 This pull request fixes issue #{id}.
 
-It will apply the following changes :
+It will apply the following changes:
 
-* 
-* 
-* 
+* Change 1
+* Change 2
+* Change 3

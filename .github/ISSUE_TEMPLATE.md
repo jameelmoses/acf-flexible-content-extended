@@ -10,18 +10,18 @@ Please note:
 
 #### Version information
 
-* Plugin version : 
-* ACF version : 
-* PHP : 
-* WordPress : 
+* Plugin version:
+* ACF version:
+* PHP:
+* WordPress:
 
 #### Steps to reproduce
 
-1. 
-2. 
-3. 
+1. Step 1
+2. Step 2
+3. Step 3
 
-#### What was expected
+#### Expected result
 
 
-#### What happened instead
+#### Actual result
