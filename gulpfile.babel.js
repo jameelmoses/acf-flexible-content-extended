@@ -27,13 +27,10 @@ gulp.task('js:lint', () => gulp.src('assets/src/acf-flexible-content-extended.js
   .pipe($.eslint.failAfterError())
 );
 
-gulp.task('js:transpile', () => gulp.src('assets/src/acf-flexible-content-extended.js')
-  .pipe($.babel({
-    presets: ['@babel/preset-env']
-  }))
+gulp.task('js:dist', () => gulp.src('assets/src/acf-flexible-content-extended.js')
   .pipe(gulp.dest('assets/js/'))
 );
 
-gulp.task('js', gulp.series('js:lint', 'js:transpile'));
+gulp.task('js', gulp.series('js:lint', 'js:dist'));
 
 gulp.task('default', gulp.series('clean', gulp.parallel('sass', 'js')));

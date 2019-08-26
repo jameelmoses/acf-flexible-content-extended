@@ -1,16 +1,114 @@
-/* ACF Core
-------------------------------------------------------------*/
-.acf-flexible-content .layout .acf-fc-modal-content > .acf-table {
+.acf-flexible-content .layout.-highlight-closed {
+  animation: highlightClosed .65s .1s ease-out;
+}
+
+.acf-flexible-content .layout.layout-error-messages > .acf-fc-layout-handle .acf-fc-layout-order {
+  background: #F55E4F;
+  color: #fff;
+}
+
+.acf-flexible-content .layout.fc-modal > .acf-fc-layout-handle {
+  border: none !important;
+}
+
+.acf-flexible-content .layout.-modal {
+  position: fixed !important;
+  top: 50px !important;
+  right: 0 !important;
+  left: 0 !important;
+  width: 90vw;
+  max-width: 960px;
+  max-height: calc(100vh - 100px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  margin: auto;
+  z-index: 10001;
+}
+
+.acf-flexible-content .layout.-modal.-animate {
+  animation: fcModalSlide .2s ease-out;
+}
+
+.acf-flexible-content .layout.-modal > .acf-fc-modal-title {
+  display: block;
+}
+
+.acf-flexible-content .layout.-modal > .acf-fc-modal-content {
+  display: block;
+  max-height: calc(100vh - 138px);
+  overflow: auto;
+}
+
+.acf-flexible-content .layout.-modal > .acf-fc-layout-controls,
+.acf-flexible-content .layout.-modal > .acf-fc-layout-handle {
+  display: none;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-title {
+  display: none;
+  position: relative;
+  box-sizing: border-box;
+  height: 37px;
+  background: #eee;
+  line-height: 37px;
+  padding: 0 40px 0 10px;
+  border-bottom: 1px solid #dfdfdf;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-title > .-cancel {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 37px;
+  height: 37px;
+  color: #666;
+  line-height: 37px;
+  text-align: center;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-title > .-cancel:hover, .acf-flexible-content .layout .acf-fc-modal-title > .-cancel:focus {
+  color: #F55E4F;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-title > .acf-fc-layout-order {
+  background: #ddd;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-content {
+  display: none;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-content .acf-table {
   border: 0 none;
   box-shadow: none;
 }
 
-.acf-flexible-content .layout .acf-fc-modal-content > .acf-table > tbody > tr {
+.acf-flexible-content .layout .acf-fc-modal-content .acf-table thead tr th {
+  background: #F9F9F9;
+}
+
+.acf-flexible-content .layout .acf-fc-modal-content .acf-table tbody tr {
   background: #fff;
 }
 
-.acf-flexible-content .layout .acf-fc-modal-content > .acf-table > thead > tr > th {
-  background: #F9F9F9;
+.acf-flexible-content .layout:hover .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content .layout:hover .acf-fc-layout-controls .acf-icon.-minus, .acf-flexible-content .layout.-hover .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content .layout.-hover .acf-fc-layout-controls .acf-icon.-minus, .acf-flexible-content .layout:focus .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content .layout:focus .acf-fc-layout-controls .acf-icon.-minus, .acf-flexible-content .layout.-focus .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content .layout.-focus .acf-fc-layout-controls .acf-icon.-minus {
+  visibility: hidden;
+}
+
+.acf-flexible-content > .values > .layout:hover .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content > .values > .layout:hover .acf-fc-layout-controls .acf-icon.-minus, .acf-flexible-content > .values > .layout.-hover .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content > .values > .layout.-hover .acf-fc-layout-controls .acf-icon.-minus, .acf-flexible-content > .values > .layout:focus .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content > .values > .layout:focus .acf-fc-layout-controls .acf-icon.-minus, .acf-flexible-content > .values > .layout.-focus .acf-fc-layout-controls .acf-icon.-plus,
+.acf-flexible-content > .values > .layout.-focus .acf-fc-layout-controls .acf-icon.-minus {
+  visibility: visible;
 }
 
 .acf-repeater .acf-row.-collapsed .acf-fc-modal-content > .acf-fields > * {
@@ -26,21 +124,6 @@
   z-index: 10002 !important;
 }
 
-.acf-flexible-content .layout:hover .acf-fc-layout-controls .acf-icon.-plus,
-.acf-flexible-content .layout.-hover .acf-fc-layout-controls .acf-icon.-plus,
-.acf-flexible-content .layout:hover .acf-fc-layout-controls .acf-icon.-minus,
-.acf-flexible-content .layout.-hover .acf-fc-layout-controls .acf-icon.-minus {
-  visibility: hidden;
-}
-
-.acf-flexible-content > .values > .layout:hover > .acf-fc-layout-controls .acf-icon.-plus,
-.acf-flexible-content > .values > .layout.-hover > .acf-fc-layout-controls .acf-icon.-plus,
-.acf-flexible-content > .values > .layout:hover > .acf-fc-layout-controls .acf-icon.-minus,
-.acf-flexible-content > .values > .layout.-hover > .acf-fc-layout-controls .acf-icon.-minus {
-  visibility: visible;
-}
-
-/* All collapsed */
 .acf-fields.-top > .acf-field-flexible-content > .acf-input > .acf-flexible-content > .values > .layout > .acf-fc-layout-handle {
   border-bottom-width: 0;
 }
@@ -50,106 +133,24 @@
   display: none;
 }
 
-/* Modal
-------------------------------------------------------------*/
 body.acf-modal-open {
   overflow: hidden;
-  /* popup from fc layout selector can't scroll */
 }
 
 #acf-flexible-content-modal-overlay {
-  background: #000;
-  opacity: 0.7;
-  filter: alpha(opacity=70);
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  background: rgba(0, 0, 0, 0.8);
   z-index: 10000;
-}
-
-.acf-flexible-content .layout.-modal {
-  z-index: 10001;
-  position: fixed !important;
-  top: 50px !important;
-  left: 0 !important;
-  right: 0 !important;
-  margin: auto;
-  width: 90vw;
-  max-width: 960px;
-  max-height: calc(100vh - 100px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-}
-
-.acf-flexible-content .layout > .acf-fc-modal-content {
-  display: none;
-}
-
-.acf-flexible-content .layout.-modal > .acf-fc-modal-content {
-  display: block;
-  overflow: auto;
-  max-height: calc(100vh - 138px);
-}
-
-.acf-flexible-content .layout .acf-fc-modal-title {
-  position: relative;
-  display: none;
-  box-sizing: border-box;
-  height: 37px;
-  line-height: 37px;
-  padding: 0 40px 0 10px;
-  background: #eee;
-  border-bottom: 1px solid #dfdfdf;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.acf-flexible-content .layout .acf-fc-modal-title > .-cancel {
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: block;
-  width: 37px;
-  height: 37px;
-  color: #666;
-  line-height: 37px;
-  text-align: center;
-}
-
-.acf-flexible-content .layout .acf-fc-modal-title > .-cancel:hover {
-  color: #F55E4F;
-}
-
-.acf-flexible-content .layout .acf-fc-modal-title > .acf-fc-layout-order {
-  background: #ddd;
-}
-
-.acf-flexible-content .layout.-modal > .acf-fc-modal-title {
-  display: block;
-}
-
-.acf-flexible-content .layout.-modal > .acf-fc-layout-controls,
-.acf-flexible-content .layout.-modal > .acf-fc-layout-handle {
-  display: none;
-}
-
-.acf-flexible-content .layout.fc-modal > .acf-fc-layout-handle {
-  border: none !important;
 }
 
 .acf-icon.-pencil::before {
   font-size: 12px;
 }
 
-.acf-flexible-content .layout.layout-error-messages > .acf-fc-layout-handle .acf-fc-layout-order {
-  background: #F55E4F;
-  color: #fff;
-}
-
-/* Animation */
 @keyframes fcModalSlide {
   from {
     transform: translateY(-30px);
@@ -161,10 +162,6 @@ body.acf-modal-open {
   }
 }
 
-.acf-flexible-content .layout.-modal.-animate {
-  animation: fcModalSlide .2s ease-out;
-}
-
 @keyframes highlightClosed {
   0% {
     background: #fff;
@@ -172,14 +169,9 @@ body.acf-modal-open {
   30% {
     background: rgba(0, 133, 186, 0.3);
   }
-  /* WordPress blue, faded */
   100% {
     background: #fff;
   }
-}
-
-.acf-flexible-content .layout.-highlight-closed {
-  animation: highlightClosed .65s .1s ease-out;
 }
 
 .acf-fc-popup {

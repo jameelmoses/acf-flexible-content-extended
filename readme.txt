@@ -51,6 +51,11 @@ This plugin works only if the [ACF Pro >= 5.7.O](https://www.advancedcustomfield
 - [ACF Pro >= 5.7.O](https://www.advancedcustomfields.com/)
 - WordPress 4.7+ because of [get_theme_file_uri()](https://developer.wordpress.org/reference/functions/get_theme_file_uri)
 - Tested up to WP 5.2.2
+- Browser Support:
+  - Last 2 Firefox major versions
+  - Last 2 Safari major versions
+  - Last 2 Edge major versions
+  - Last 2 Chrome major versions
 - PHP 5.6+
 
 From your WordPress dashboard

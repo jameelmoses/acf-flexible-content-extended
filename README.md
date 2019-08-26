@@ -46,6 +46,11 @@ add_filter( 'acf-flexible-content-extended.images', $images );
 
 - [ACF Pro >= 5.7.0](https://www.advancedcustomfields.com/)
 - WordPress 4.7+ because of [get_theme_file_uri()](https://developer.wordpress.org/reference/functions/get_theme_file_uri)
+- Browser Support:
+  - Last 2 Firefox major versions
+  - Last 2 Safari major versions
+  - Last 2 Edge major versions
+  - Last 2 Chrome major versions
 - PHP 5.6+
 
 

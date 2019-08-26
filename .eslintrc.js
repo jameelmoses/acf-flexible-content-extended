@@ -8,8 +8,11 @@ module.exports = {
   'parserOptions': {
     'sourceType': 'module'
   },
+  'globals': {
+    'acf': true
+  },
   'rules': {
-    'no-console': 1,
+    'no-console': 0,
     'indent': ['error', 2, {
       'VariableDeclarator': {
         'var': 2,

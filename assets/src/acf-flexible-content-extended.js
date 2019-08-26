@@ -1,6 +1,3 @@
-/* globals acf */
-/* eslint-disable no-console */
-
 (function($) {
 
   const ACFFCE = {
