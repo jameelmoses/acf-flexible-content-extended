@@ -4,8 +4,8 @@ Donate link: http://paypal.me/jameelmoses
 Tags: acf, advanced, custom, field, fields, addon, flexible, content, preview, modal
 Requires at least: 4.7.0
 Requires PHP: 5.4
-Tested up to: 5.2.2
-Stable tag: 1.0.0
+Tested up to: 5.3
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: https://github.com/jameelmoses/acf-flexible-content-extended/blob/master/LICENSE.md
 
@@ -50,7 +50,7 @@ This plugin works only if the [ACF Pro >= 5.7.O](https://www.advancedcustomfield
 
 - [ACF Pro >= 5.7.O](https://www.advancedcustomfields.com/)
 - WordPress 4.7+ because of [get_theme_file_uri()](https://developer.wordpress.org/reference/functions/get_theme_file_uri)
-- Tested up to WP 5.2.2
+- Tested up to WP 5.3
 - Browser Support:
   - Last 2 Firefox major versions
   - Last 2 Safari major versions
@@ -72,6 +72,11 @@ From your WordPress dashboard
 3. Screenshot of Flexible Content Field Layout Edit Modal
 
 == Changelog ==
+
+= 1.0.1 =
+*Release Date - 2 Dec 2019*
+
+* Updating dependencies
 
 = 1.0.0 =
 *Release Date - 26 Aug 2019*
