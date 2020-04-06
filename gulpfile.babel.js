@@ -1,18 +1,20 @@
 /* eslint-env node */
 
 import gulp from 'gulp';
-const $ = require('gulp-load-plugins')();
+import sass from 'gulp-sass';
+import eslint from 'gulp-eslint';
+import postcss from 'gulp-postcss';
 import del from 'del';
 import autoprefixer from 'autoprefixer';
 
 gulp.task('clean', () => del(['assets/css/acf-flexible-content-extended.css', 'assets/js/acf-flexible-content-extended.js']));
 
 gulp.task('sass', () => gulp.src('assets/src/acf-flexible-content-extended.scss')
-  .pipe($.sass({
+  .pipe(sass({
     outputStyle: 'expanded',
     errLogToConsole: true
   }))
-  .pipe($.postcss([
+  .pipe(postcss([
     autoprefixer({
       cascade: false,
       grid: true
@@ -22,9 +24,9 @@ gulp.task('sass', () => gulp.src('assets/src/acf-flexible-content-extended.scss'
 );
 
 gulp.task('js:lint', () => gulp.src('assets/src/acf-flexible-content-extended.js')
-  .pipe($.eslint())
-  .pipe($.eslint.format())
-  .pipe($.eslint.failAfterError())
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError())
 );
 
 gulp.task('js:dist', () => gulp.src('assets/src/acf-flexible-content-extended.js')

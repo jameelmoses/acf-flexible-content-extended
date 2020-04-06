@@ -3,9 +3,9 @@ Contributors: jameelmoses
 Donate link: http://paypal.me/jameelmoses
 Tags: acf, advanced, custom, field, fields, addon, flexible, content, preview, modal
 Requires at least: 4.7.0
-Requires PHP: 5.4
-Tested up to: 5.3
-Stable tag: 1.0.1
+Requires PHP: 5.6
+Tested up to: 5.4
+Stable tag: 1.0.2
 License: GPLv3 or later
 License URI: https://github.com/jameelmoses/acf-flexible-content-extended/blob/master/LICENSE.md
 
@@ -26,17 +26,13 @@ Images should be placed in your theme. By default, images are located here: `THE
 
 Also note that you can filter this path, but it **MUST** be in your theme:
 
-```php
-add_filter( 'acf-flexible-content-extended.images_path', $path );
-```
+`add_filter( 'acf-flexible-content-extended.images_path', $path );`
 
 **NOTE:** The path should not have a trailing beginning or trailing slash!
 
 Additionally, you could filter all keys and/or images:
 
-```php
-add_filter( 'acf-flexible-content-extended.images', $images );
-```
+`add_filter( 'acf-flexible-content-extended.images', $images );`
 
 = Issues & Feature Requests =
 
@@ -72,6 +68,12 @@ From your WordPress dashboard
 3. Screenshot of Flexible Content Field Layout Edit Modal
 
 == Changelog ==
+
+= 1.0.2 =
+*Release Date - 6 Apr 2020*
+
+* Supporting nested flexible content fields
+* Updating dependencies
 
 = 1.0.1 =
 *Release Date - 2 Dec 2019*
