@@ -94,19 +94,33 @@
 
       // Edit button
       const edit = $('<a class="acf-icon -pencil small light" href="#" data-event="edit-layout" title="Edit layout" />');
-      edit.on('click', ACFFCE.open);
-      $layout.find('> .acf-fc-layout-controls').append(edit);
 
-      // Add modal elements
-      $layout.prepend('<div class="acf-fc-modal-title" />');
-      $layout.find('> .acf-fields, > .acf-table').wrapAll('<div class="acf-fc-modal-content" />');
+      // Not a duplicated layout
+      if (!$layout.find('> .acf-fc-layout-controls a[data-event="edit-layout"]').length) {
+
+        // Add edit button
+        $layout.find('> .acf-fc-layout-controls').append(edit);
+
+        // Add modal elements
+        $layout.prepend('<div class="acf-fc-modal-title" />');
+        $layout.find('> .acf-fields, > .acf-table').wrapAll('<div class="acf-fc-modal-content" />');
+
+        // Duplicated layout
+      } else {
+        // Remove old edit button copied from existing layout
+        $layout.find('> .acf-fc-layout-controls a[data-event="edit-layout"]').remove();
+        // Add new edit button for current layout
+        $layout.find('> .acf-fc-layout-controls').append(edit);
+      }
+
+      // Bind click event to edit button to open modal
+      edit.on('click', ACFFCE.open);
 
     },
 
     open() {
 
       const $layout = $(this).parents('.layout:first');
-
       const caption = $layout.find('> .acf-fc-layout-handle').html();
       const a = $('<a class="dashicons dashicons-no -cancel" />').on('click', ACFFCE.close);
 

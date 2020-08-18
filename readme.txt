@@ -5,7 +5,7 @@ Tags: acf, advanced, custom, field, fields, addon, flexible, content, preview, m
 Requires at least: 4.7.0
 Requires PHP: 5.6
 Tested up to: 5.5
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv3 or later
 License URI: https://github.com/jameelmoses/acf-flexible-content-extended/blob/master/LICENSE.md
 
@@ -68,6 +68,11 @@ From your WordPress dashboard
 3. Screenshot of Flexible Content Field Layout Edit Modal
 
 == Changelog ==
+
+= 1.0.6 =
+*Release Date - 18 Aug 2020*
+
+* Resolve issue with modals related to new duplicate layout function in ACF 5.9
 
 = 1.0.5 =
 *Release Date - 18 Aug 2020*
