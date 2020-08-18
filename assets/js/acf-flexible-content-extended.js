@@ -1,5 +1,9 @@
 (function($) {
 
+  if (typeof acf === 'undefined' || !acf.getField) {
+    return false;
+  }
+
   const ACFFCE = {
 
     modals: [],
@@ -204,8 +208,6 @@
 
   };
 
-  if (acf.getField) {
-    ACFFCE.init();
-  }
+  return ACFFCE.init();
 
 })(jQuery);

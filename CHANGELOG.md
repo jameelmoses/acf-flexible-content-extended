@@ -1,5 +1,8 @@
 # Changelog ##
 
+## 1.0.7 - 18 Aug 2020
+* Resolve JS bug
+
 ## 1.0.6 - 18 Aug 2020
 * Resolve issue with modals related to new duplicate layout function in ACF 5.9
 
