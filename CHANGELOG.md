@@ -1,5 +1,8 @@
 # Changelog ##
 
+## 1.0.5 - 18 Aug 2020
+* Resolve JS error if acf.getField() is not defined
+
 ## 1.0.4 - 18 Aug 2020
 * Update hook for enqueuing and registering assets for ACF 5.9 compatibility. Thanks @elliottpost!
 

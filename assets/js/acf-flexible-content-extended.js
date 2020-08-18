@@ -190,6 +190,8 @@
 
   };
 
-  ACFFCE.init();
+  if (acf.getField) {
+    ACFFCE.init();
+  }
 
 })(jQuery);
