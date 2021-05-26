@@ -4,7 +4,7 @@ Donate link: http://paypal.me/jameelmoses
 Tags: acf, advanced, custom, field, fields, addon, flexible, content, preview, modal
 Requires at least: 4.7.0
 Requires PHP: 5.6
-Tested up to: 5.5
+Tested up to: 5.7.2
 Stable tag: 1.0.8
 License: GPLv3 or later
 License URI: https://github.com/jameelmoses/acf-flexible-content-extended/blob/master/LICENSE.md
