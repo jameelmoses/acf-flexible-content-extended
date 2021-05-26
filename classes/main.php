@@ -1,4 +1,6 @@
-<?php namespace ACF_FCE;
+<?php
+
+namespace ACF_FCE;
 
 class Main {
 	use Singleton;
@@ -6,8 +8,8 @@ class Main {
 	protected function init() {
 
 		// Assets
-		add_action( 'admin_footer', [ $this, 'register_assets' ], 1 );
-		add_action( 'admin_footer', [ $this, 'enqueue_assets' ] );
+		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'register_assets' ], 1 );
+		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 
 		// Images
 		add_action( 'acf/input/admin_footer', [ $this, 'layouts_images_style' ], 20 );
@@ -27,7 +29,7 @@ class Main {
 		$css = "\n<style>";
 		$css .= "\n\t /** Flexible Content Extended for Advanced Custom Fields : dynamic images */";
 		foreach ( $images as $layout_key => $image_url ) {
-			$css .= sprintf( "\n\t .acf-fc-popup ul li a[data-layout=%s] .acf-fc-popup-image { background-image: url(\"%s\"); }", $layout_key, $image_url );
+			$css .= sprintf( "\n\t .acf-fc-popup ul li a[data-layout=\"%s\"] .acf-fc-popup-image { background-image: url(\"%s\"); }", $layout_key, $image_url );
 		}
 		$css .= "\n</style>\n";
 
@@ -36,8 +38,6 @@ class Main {
 
 	/**
 	 * Get all ACF flexible content field layout keys
-	 *
-	 * TODO: Add caching?
 	 *
 	 * @return array
 	 */
@@ -51,7 +51,7 @@ class Main {
 		foreach ( $groups as $group ) {
 			$fields = (array) acf_get_fields( $group );
 			if ( !empty( $fields ) ) {
-				$this->retrieve_flexible_keys_from_fields($fields, $keys);
+				$this->retrieve_flexible_keys_from_fields( $fields, $keys );
 			}
 		}
 
@@ -69,15 +69,15 @@ class Main {
 			if ( 'flexible_content' === $field['type'] ) {
 				foreach ( $field['layouts'] as $layout_field ) {
 					// Don't revisit keys we've recorded already
-					if ( !empty( $keys[$layout_field['key']] ) ) {
+					if ( ! empty( $keys[ $layout_field['key'] ] ) ) {
 						continue;
 					}
 
-					$keys[$layout_field['key']] = $layout_field['name'];
+					$keys[ $layout_field['key'] ] = $layout_field['name'];
 
 					// Flexible content has a potentially recursive structure. Each layout
 					// has its own sub-fields that could in turn be flexible content.
-					if ( !empty( $layout_field['sub_fields'] ) ) {
+					if ( ! empty( $layout_field['sub_fields'] ) ) {
 						$this->retrieve_flexible_keys_from_fields( $layout_field['sub_fields'], $keys );
 					}
 				}
@@ -149,7 +149,7 @@ class Main {
 	 * Register assets
 	 */
 	public function register_assets() {
-		wp_register_script( 'acf-flexible-content-extended', ACF_FCE_URL . 'assets/js/acf-flexible-content-extended.js', [ 'jquery' ], ACF_FCE_VERSION );
+		wp_register_script( 'acf-flexible-content-extended', ACF_FCE_URL . 'assets/js/acf-flexible-content-extended.js', [ 'jquery', 'acf-input' ], ACF_FCE_VERSION );
 		wp_register_style( 'acf-flexible-content-extended', ACF_FCE_URL . 'assets/css/acf-flexible-content-extended.css', [], ACF_FCE_VERSION );
 	}
 

@@ -1,4 +1,6 @@
-<?php namespace ACF_FCE;
+<?php
+
+namespace ACF_FCE;
 
 class Autoloader {
 	/**

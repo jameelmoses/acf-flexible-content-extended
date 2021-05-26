@@ -1,19 +1,10 @@
 (function($) {
 
-  if (typeof acf === 'undefined' || !acf.getField) {
-    return false;
-  }
-
   const ACFFCE = {
 
     modals: [],
 
     init() {
-
-      if (typeof acf === 'undefined') {
-        console.error('ACF JavaScript library not found!');
-        return false;
-      }
 
       ACFFCE.removeSinglePreviewModal();
       ACFFCE.addPreviewModalLinkMarkup();
@@ -208,6 +199,8 @@
 
   };
 
-  return ACFFCE.init();
+  $(function() {
+    ACFFCE.init();
+  });
 
 })(jQuery);

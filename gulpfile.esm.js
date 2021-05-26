@@ -1,16 +1,23 @@
 /* eslint-env node */
 
 import gulp from 'gulp';
-import sass from 'gulp-sass';
-import eslint from 'gulp-eslint';
-import postcss from 'gulp-postcss';
+
 import del from 'del';
+
+import eslint from 'gulp-eslint';
+
+import sass from 'gulp-sass';
+sass.compiler = require('sass');
+import Fiber from 'fibers';
+
+import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 
 gulp.task('clean', () => del(['assets/css/acf-flexible-content-extended.css', 'assets/js/acf-flexible-content-extended.js']));
 
 gulp.task('sass', () => gulp.src('assets/src/acf-flexible-content-extended.scss')
   .pipe(sass({
+    fiber: Fiber,
     outputStyle: 'expanded',
     errLogToConsole: true
   }))

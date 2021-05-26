@@ -1,5 +1,8 @@
 # Changelog ##
 
+## 1.0.8 - 26 May 2021
+* Resolves CSS and JS conflicts. Adds support for layouts that begin with a number.
+
 ## 1.0.7 - 18 Aug 2020
 * Resolve JS bug
 

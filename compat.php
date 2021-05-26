@@ -1,4 +1,7 @@
-<?php namespace ACF_FCE;
+<?php
+
+namespace ACF_FCE;
+
 class Compatibility {
 	/**
 	 * admin_init hook callback
