@@ -1,6 +1,6 @@
 {
   "name": "jameelmoses/acf-flexible-content-extended",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Extends the ACF Flexible Content Field by transforming the layout list into a modal with image previews. Editing the fields layouts also happens in a modal for a better editing user experience.",
   "keywords": [
     "WP",

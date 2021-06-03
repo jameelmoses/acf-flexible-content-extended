@@ -23,7 +23,7 @@ trait Singleton {
 	/**
 	 * @return self
 	 */
-	final public static function get_instance() {
+	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new static;
 		}
@@ -34,7 +34,7 @@ trait Singleton {
 	/**
 	 * Constructor protected from the outside
 	 */
-	final private function __construct() {
+	private function __construct() {
 		$this->init();
 	}
 
@@ -50,12 +50,12 @@ trait Singleton {
 	 *
 	 * @return void
 	 */
-	final private function __clone() {}
+	private function __clone() {}
 
 	/**
 	 * prevent from being unserialized
 	 *
 	 * @return void
 	 */
-	final private function __wakeup() {}
+	public function __wakeup() {}
 }

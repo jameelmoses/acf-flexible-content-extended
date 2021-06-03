@@ -1,5 +1,8 @@
 # Changelog ##
 
+## 1.0.9 - 3 Jun 2021
+* PHP 8 Compatibility
+
 ## 1.0.8 - 26 May 2021
 * Resolves CSS and JS conflicts. Adds support for layouts that begin with a number.
 

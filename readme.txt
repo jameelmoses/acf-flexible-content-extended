@@ -5,7 +5,7 @@ Tags: acf, advanced, custom, field, fields, addon, flexible, content, preview, m
 Requires at least: 4.7.0
 Requires PHP: 5.6
 Tested up to: 5.7.2
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv3 or later
 License URI: https://github.com/jameelmoses/acf-flexible-content-extended/blob/master/LICENSE.md
 
@@ -68,6 +68,11 @@ From your WordPress dashboard
 3. Screenshot of Flexible Content Field Layout Edit Modal
 
 == Changelog ==
+
+= 1.0.9 =
+*Release Date - 3 Jun 2021*
+
+* PHP 8 Compatibility
 
 = 1.0.8 =
 *Release Date - 26 May 2021*
