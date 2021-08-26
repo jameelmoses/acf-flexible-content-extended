@@ -1,5 +1,8 @@
 # Changelog ##
 
+## 1.10.0 - 26 Aug 2021
+* Fixing issue with ACF version compare since it doesn't follow PHP version constraints
+
 ## 1.0.9 - 3 Jun 2021
 * PHP 8 Compatibility
 
