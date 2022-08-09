@@ -68,12 +68,16 @@ class Main {
 		foreach ( $fields as $field ) {
 			if ( 'flexible_content' === $field['type'] ) {
 				foreach ( $field['layouts'] as $layout_field ) {
+					// Prevent skipping layout fields with identical keys from 
+					// different fields by creating a unique identifier.
+					$field_identifier = $field['key'] . '-' . $layout_field['key'];
+
 					// Don't revisit keys we've recorded already
-					if ( ! empty( $keys[ $layout_field['key'] ] ) ) {
+					if ( ! empty( $keys[ $field_identifier ] ) ) {
 						continue;
 					}
 
-					$keys[ $layout_field['key'] ] = $layout_field['name'];
+					$keys[ $field_identifier ] = $layout_field['name'];
 
 					// Flexible content has a potentially recursive structure. Each layout
 					// has its own sub-fields that could in turn be flexible content.
