@@ -12,16 +12,16 @@ class Requirements {
 	 * @return bool
 	 */
 	public function check_requirements() {
+
 		if ( ! function_exists( 'acf' ) ) {
 			$this->display_error( __( 'Advanced Custom Fields is a required plugin.', 'acf-flexible-content-extended' ) );
-
 			return false;
 		}
 
 		if ( $this->version_compare( '5.6.0', acf()->version, '>' ) ) {
-			$this->display_error( __( 'Advanced Custom Fields should be on version 5.6.0 or above.', 'acf-flexible-content-extended' ) );
+			$this->display_error( __( 'Advanced Custom Fields must be on version 5.6.0 or above.', 'acf-flexible-content-extended' ) );
 			return false;
-		};
+		}
 
 		return true;
 	}

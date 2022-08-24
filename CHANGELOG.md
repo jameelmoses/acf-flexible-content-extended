@@ -1,5 +1,16 @@
 # Changelog ##
 
+## 2.0.0 - 24 Aug 2022
+
+#### Breaking Changes
+* Requires PHP >= 8.0
+* Requires WordPress >= 6.0
+
+#### Improvements
+
+* Solve for flexible content fields inside of repeaters and groups. Thanks @romanklabal!
+* CSS improvements (uses css grid instead of flexbox)
+
 ## 1.10.0 - 26 Aug 2021
 * Fixing issue with ACF version compare since it doesn't follow PHP version constraints
 

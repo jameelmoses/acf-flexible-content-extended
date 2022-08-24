@@ -1,13 +1,13 @@
 <?php
 /*
  Plugin Name: Flexible Content Extended for Advanced Custom Fields
- Version: 1.10.0
+ Version: 2.0.0
  Plugin URI: https://github.com/jameelmoses/acf-flexible-content-extended
  Description: Extends the ACF Flexible Content Field by transforming the layout list into a modal with image previews. Editing the fields layouts also happens in a modal for a better editing user experience.
  Author: Jameel Moses
  Author URI: https://github.com/jameelmoses
  Text Domain: acf-flexible-content-extended
- Contributors: Ben Voynick
+ Contributors: Ben Voynick, Roman Klabal
 
  ----
 
@@ -34,8 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'ACF_FCE_VERSION', '1.10.0' );
-define( 'ACF_FCE_MIN_PHP_VERSION', '5.6' );
+define( 'ACF_FCE_VERSION', '2.0.0' );
+define( 'ACF_FCE_MIN_PHP_VERSION', '8.0' );
 
 // Plugin URL and PATH
 define( 'ACF_FCE_URL', plugin_dir_url( __FILE__ ) );

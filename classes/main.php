@@ -29,7 +29,9 @@ class Main {
 		$css = "\n<style>";
 		$css .= "\n\t /** Flexible Content Extended for Advanced Custom Fields : dynamic images */";
 		foreach ( $images as $layout_key => $image_url ) {
-			$css .= sprintf( "\n\t .acf-fc-popup ul li a[data-layout=\"%s\"] .acf-fc-popup-image { background-image: url(\"%s\"); }", $layout_key, $image_url );
+      if ( isset( $image_url ) ) {
+        $css .= sprintf( "\n\t .acf-fc-popup ul li a[data-layout=\"%s\"] .acf-fc-popup-image { background-image: url(\"%s\"); }", $layout_key, $image_url );
+      }
 		}
 		$css .= "\n</style>\n";
 
@@ -44,12 +46,14 @@ class Main {
 	public function retrieve_flexible_keys() {
 		$keys   = [];
 		$groups = acf_get_field_groups();
+
 		if ( empty( $groups ) ) {
 			return $keys;
 		}
 
 		foreach ( $groups as $group ) {
 			$fields = (array) acf_get_fields( $group );
+
 			if ( !empty( $fields ) ) {
 				$this->retrieve_flexible_keys_from_fields( $fields, $keys );
 			}
@@ -66,18 +70,32 @@ class Main {
 	 */
 	protected function retrieve_flexible_keys_from_fields( $fields, &$keys ) {
 		foreach ( $fields as $field ) {
-			if ( 'flexible_content' === $field['type'] ) {
+
+      // Repeater and group fields
+      if (
+        'repeater' === $field['type'] ||
+        'group' === $field['type']
+      ) {
+        // If this is a repeater or group field, check to see if it
+        // contains any nested flexible content fields
+        $subFields = acf_get_fields( $field );
+        $this->retrieve_flexible_keys_from_fields( $subFields, $keys );
+
+        // Flexible content fields
+      } elseif ( 'flexible_content' === $field['type'] ) {
+
 				foreach ( $field['layouts'] as $layout_field ) {
-					// Prevent skipping layout fields with identical keys from 
-					// different fields by creating a unique identifier.
-					$field_identifier = $field['key'] . '-' . $layout_field['key'];
 
-					// Don't revisit keys we've recorded already
-					if ( ! empty( $keys[ $field_identifier ] ) ) {
-						continue;
-					}
+          // Prevent skipping layout fields with identical keys from
+  				// different fields by creating a unique identifier.
+  				$field_identifier = $field['key'] . '-' . $layout_field['key'];
 
-					$keys[ $field_identifier ] = $layout_field['name'];
+  				// Don't revisit keys we've recorded already
+  				if ( ! empty( $keys[ $field_identifier ] ) ) {
+  					continue;
+  				}
+
+  				$keys[ $field_identifier ] = $layout_field['name'];
 
 					// Flexible content has a potentially recursive structure. Each layout
 					// has its own sub-fields that could in turn be flexible content.
@@ -96,6 +114,7 @@ class Main {
 	 */
 	public function get_layouts_images() {
 		$flexibles = $this->retrieve_flexible_keys();
+
 		if ( empty( $flexibles ) ) {
 			return [];
 		}
@@ -145,8 +164,6 @@ class Main {
 		if ( is_file( $image_path ) ) {
 			return $image_uri;
 		}
-
-		return ACF_FCE_URL . 'assets/images/default.jpg';
 	}
 
 	/**
