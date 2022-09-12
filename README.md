@@ -51,7 +51,7 @@ add_filter( 'acf-flexible-content-extended.images', $images );
   - Last 2 Safari major versions
   - Last 2 Edge major versions
   - Last 2 Chrome major versions
-- PHP 5.6+
+- PHP 8.0+
 
 
 ---
