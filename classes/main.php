@@ -154,11 +154,20 @@ class Main {
 		 */
 		$path = apply_filters( 'acf-flexible-content-extended.images_path', 'lib/admin/images/acf-flexible-content-extended' );
 
+		/**
+		 * Allow to change the file extension expected
+		 *
+		 * @params string $extension : Extension to look for
+		 *
+		 * @return string
+		 */
+		$extension = apply_filters( 'acf-flexible-content-extended.images_extension', 'jpg' );
+
 		// Rework the tpl
 		$layout = str_replace( '_', '-', $layout );
 
-		$image_path = get_stylesheet_directory() . '/' . $path . '/' . $layout . '.jpg';
-		$image_uri = get_stylesheet_directory_uri() . '/' . $path . '/' . $layout . '.jpg';
+		$image_path = get_stylesheet_directory() . '/' . $path . '/' . $layout . '.' . $extension;
+		$image_uri = get_stylesheet_directory_uri() . '/' . $path . '/' . $layout . '.' . $extension;
 
 		// Direct path to custom folder
 		if ( is_file( $image_path ) ) {

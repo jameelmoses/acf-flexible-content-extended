@@ -29,6 +29,12 @@ Also note that you can filter this path, but it **MUST** be in your theme:
 
 **NOTE:** The path should not have a trailing beginning or trailing slash!
 
+You can filter the file extension the plugin searches for. By default the plugin expects `jpg`.
+
+`add_filter( \'acf-flexible-content-extended.images_extension\', $extension );`
+
+**NOTE:** The extension should not have a leading dot!
+
 Additionally, you could filter all keys and/or images:
 
 `add_filter( \'acf-flexible-content-extended.images\', $images );`
